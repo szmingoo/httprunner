@@ -1,0 +1,45 @@
+name: /api3/newo2o/gateway/merchant/v1.0/wecom/material/update
+request:
+    headers:
+        Apiclient: saas-pc
+        Authorization: ${authorization()}
+        Content-Type: application/json; charset=utf-8
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+            like Gecko) Chrome/88.0.4324.182 Safari/537.36
+        channel-type: pc
+        is-debug: 'true'
+        weimob-pid: '280'
+    json:
+        backgroundImgUrl: https://image-c.weimobwmc.com/wrz/6ffd67e5c3044776892c7bf61c76eaa8.png
+        codeList:
+        -   name: 群活码-0
+            type: 201
+            value: 152
+        connectCodeIdList:
+        -   152
+        connectCodeType: 201
+        materialId: $materialId
+        materialName: 测试渠道活码
+        merchantId: '280'
+        merchantWid: 2995903
+        pid: '280'
+        recomStrategyType: '101'
+        remark: ''
+        showStyleType: 101
+        storeId: null
+        tagIds:
+        - 244596
+        tagSwitchStatus: $tagSwitchStatus
+        tags:
+        -   name: 左庭右院压测标签1
+            suffixText: ''
+            value: 244596
+    method: POST
+    url: http://master.saas.weimobqa.com/api3/newo2o/gateway/merchant/v1.0/wecom/material/update
+validate:
+-   eq:
+    - status_code
+    - 200
+-   eq:
+    - content.errmsg
+    - 成功

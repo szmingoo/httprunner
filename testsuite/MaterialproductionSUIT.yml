@@ -1,0 +1,18 @@
+config:
+    name: testsuite description
+testcases:
+-
+    name: 查询物料
+    testcase: testcases/MateriallistCASE.yml
+-
+    name: 新增物料
+    testcase: testcases/NewmaterialCASE.yml
+-
+    name: 编辑物料
+    testcase: testcases/UpdatematerialCASE.yml
+-
+    name: 物料详情
+    testcase: testcases/MaterialDetailCASE.yml
+-
+    name: 删除物料
+    testcase: testcases/DeleteMaterialCASE.yml

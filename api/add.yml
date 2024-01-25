@@ -1,0 +1,31 @@
+name: /api/add/
+request:
+    headers:
+        Authentication: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk4NzQ1ODEzLCJpYXQiOjE2OTg3NDIyMTMsImp0aSI6ImRkODEyMmExYTFkZjQyNDc4ZWRkMTAyMzM1NzE4NzE4IiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImNvZGUiOjIwMDAwfQ.2zj061ZvH8z0tC4EZwwjy7sKoAwJ-mcx4U20hE7_Q9Q
+        Content-Type: application/json
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+            like Gecko) Chrome/108.0.5359.125 Safari/537.36
+    json:
+        data: '123'
+        header: '123'
+        method: 2
+        name: '312'
+        remark: '123'
+        response: ''
+        status: ''
+        url: '123'
+    method: POST
+    url: http://localhost.charlesproxy.com:8000/api/add/
+validate:
+-   eq:
+    - status_code
+    - 200
+-   eq:
+    - headers.Content-Type
+    - application/json
+-   eq:
+    - content.code
+    - '200'
+-   eq:
+    - content.error_num
+    - 0

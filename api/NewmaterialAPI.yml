@@ -1,0 +1,49 @@
+name: /api3/newo2o/gateway/merchant/v1.0/wecom/material/add
+variables:
+    name: name
+    value: value
+    materialName: szm${random_str(5)}
+request:
+    headers:
+        Apiclient: saas-pc
+        Authorization: ${authorization()}
+        Content-Type: application/json; charset=utf-8
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+            like Gecko) Chrome/88.0.4324.182 Safari/537.36
+        channel-type: pc
+        is-debug: 'true'
+        weimob-pid: '280'
+    json:
+        backgroundImgUrl: https://image-c.weimobwmc.com/wrz/61d6ae6a332d46a2b744b8e7509ffa6a.png
+        codeList:
+        -   name: $name
+            type: 101
+            value: $value
+        connectCodeIdList:
+        - 2464
+        connectCodeType: 101
+        materialName: $materialName
+        merchantId: '280'
+        merchantWid: 2995903
+        pid: '280'
+        recomStrategyType: '101'
+        remark: ''
+        showStyleType: 101
+        storeId: null
+        tagIds: []
+        tagSwitchStatus: 102
+    method: POST
+    url: http://master.saas.weimobqa.com/api3/newo2o/gateway/merchant/v1.0/wecom/material/add
+validate:
+-   eq:
+    - status_code
+    - 200
+-   eq:
+    - content.errmsg
+    - 成功
+-   eq:
+    - content.errcode
+    - 0
+-   eq:
+    - content.message
+    - 成功

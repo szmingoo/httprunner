@@ -1,0 +1,40 @@
+config:
+    name: testcase description
+teststeps:
+-
+    name: 默认物料列表
+    api: api/MateriallistAPI.yml
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.errmsg
+        - 成功
+-
+    name: 根据物料名称查询
+    api: api/MateriallistAPI.yml
+    variables:
+        materialName: 渠道活码
+        sql_name: select count(*) from d_o2o_merchant.wecom_material where pid=280 and material_name=${to_str($materialName)}
+    extract:
+        - totalCount: content.data.totalCount
+    validate:
+    -   eq:
+        - ${assert_sql($sql_name,$totalCount)}
+        - 成功
+-
+    name: 根据创建时间查询
+    api: api/MateriallistAPI.yml
+    variables:
+        query_createEndDate: 20210329235959
+        query_createStartDate: 20210325000000
+        createEndDate: ${to_time($query_createEndDate)}
+        createStartDate: ${to_time($query_createStartDate)}
+        material_count: select count(*) from d_o2o_merchant.wecom_material where pid=280 and create_time between ${to_time_str($query_createStartDate)} and ${to_time_str($query_createEndDate)}
+    extract:
+        - totalCount: content.data.totalCount
+    validate:
+    -   eq:
+        - ${assert_sql($material_count,$totalCount)}
+        - 成功

@@ -1,0 +1,42 @@
+config:
+    name: test description
+teststeps:
+-
+    name: 新增员工活码
+    api: api/NewEmployeeCodeApi.yml
+-
+    name: 获取员工活码
+    api: api/EmployeelivecodeAPI.yml
+    extract:
+        - staff_code_name: content.data.contactCodeVOList.0.codeName
+        - staff_code_id: content.data.contactCodeVOList.0.codeId
+-
+    name: 新增物料
+    api: api/NewmaterialAPI.yml
+    variables:
+        name: $staff_code_name
+        value: $staff_code_id
+-
+    name: 编辑物料-不开启自动打标签
+    api: api/UpdateMaterialApi.yml
+    variables:
+        tagSwitchStatus: 102
+        material_id: select m.material_id from d_o2o_merchant.wecom_material m where m.pid=280 limit 1
+        materialId: ${jdbc($material_id)}
+        material_name: select m.material_name from d_o2o_merchant.wecom_material m where m.pid=280 and m.material_id=$materialId
+    validate:
+    -   eq:
+        - ${assert_sql($material_name,测试渠道活码)}
+        - 成功
+-
+    name: 编辑物料-开启自动打标签
+    api: api/UpdateMaterialApi.yml
+    variables:
+        tagSwitchStatus: 101
+        material_id: select m.material_id from d_o2o_merchant.wecom_material m where m.pid=280 limit 1
+        materialId: ${jdbc($material_id)}
+        material_name: select m.material_name from d_o2o_merchant.wecom_material m where m.pid=280 and m.material_id=$materialId
+    validate:
+    -   eq:
+        - ${assert_sql($material_name,测试渠道活码)}
+        - 成功
